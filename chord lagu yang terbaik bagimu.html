@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lirik lagu</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #b9cfd8, #203a43, #2c5364);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    h2 {
+      color: #e5dbaf;
+      text-shadow: 2px 2px 5px black;
+    }
+    #lyrics {
+      margin-top: 30px;
+      font-size: 18px;
+      line-height: 1.8;
+      white-space: pre-line;
+      min-height: 300px;
+    }
+    .line {
+      margin-bottom: 15px;
+    }
+    .chord {
+      font-style: italic;
+      color: #00ffcc;
+      font-size: 16px;
+      display: block;
+    }
+    .highlight {
+      color: #c0bcab;
+      font-weight: bold;
+      text-shadow: 0px 0px 10px #46402a;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #ffcc00;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #ffaa00;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎶 Yang Terbaik Bagimu 🎶</h2>
+  <div id="lyrics">Klik tombol "Mulai Nyanyi" untuk menampilkan lirik & chord.</div>
+  <button onclick="startLyrics()">Mulai Nyanyi</button>
+
+  <script>
+    // Lirik + chord ditampilkan
+    const lyrics = [
+      {text: "Teringat masa kecilku", chord: "C G Am G"},
+      {text: "Kau peluk dan kau manja", chord: "F Em Dm G"},
+      {text: "Indahnya saat itu", chord: "C G Am G"},
+      {text: "Buatku melambung", chord: "F Em Dm"},
+      {text: "Disisimu terngiang", chord: "G Em F"},
+      {text: "Hangat nafas segar harum tubuhmu", chord: "G Am"},
+      {text: "Kau tuturkan segala", chord: "F G Em"},
+      {text: "Mimpi-mimpi serta harapanmu", chord: "Dm G C"},
+      "",
+      {text: "Kau ingin ku menjadi", chord: "C G Am G"},
+      {text: "Yang terbaik bagimu", chord: "F Em Dm G"},
+      {text: "Patuhi perintahmu", chord: "C G Am G"},
+      {text: "Jauhkan godaan", chord: "F Em Dm"},
+      {text: "Yang mungkin ku lakukan", chord: "G Em F"},
+      {text: "Dalam waktu ku beranjak dewasa", chord: "Dm E Am"},
+      {text: "Jangan sampai membuatku", chord: "G F Em"},
+      {text: "Terbelenggu jatuh dan terinjak", chord: "Dm G C"},
+      "",
+      {text: "Reff:", chord: ""},
+      {text: "Tuhan tolonglah", chord: "F Em"},
+      {text: "Sampaikan sejuta sayangku untuknya", chord: "F G C"},
+      {text: "Ku terus berjanji", chord: "F Am"},
+      {text: "Tak kan khianati pintanya", chord: "D G"},
+      {text: "Ayah dengarlah", chord: "F Em"},
+      {text: "Betapa sesungguhnya ku mencintaimu", chord: "F G C"},
+      {text: "Kan ku buktikan", chord: "F Am"},
+      {text: "Ku mampu penuh naumu", chord: "F G C"},
+      "",
+      {text: "Andaikan detik itu", chord: "C G Am G"},
+      {text: "Kan bergulir kembali", chord: "F Em Dm G"},
+      {text: "Ku rindukan suasana", chord: "C G Am G"},
+      {text: "Basuh jiwaku", chord: "F Em Dm"},
+      {text: "Membahagiakan aku", chord: "G Em F"},
+      {text: "Yang haus akan kasih dan sayangmu", chord: "Dm E Am"},
+      {text: "Tuk wujudkan segala", chord: "G F Em"},
+      {text: "Sesuatu yang pernah terlewati", chord: "Dm G C"},
+      "",
+      {text: "Reff (ulang)", chord: ""}
+    ];
+
+    let index = 0;
+    let interval;
+
+    function startLyrics() {
+      const display = document.getElementById("lyrics");
+      display.innerHTML = "";
+      index = 0;
+
+      clearInterval(interval);
+      interval = setInterval(() => {
+        if (index < lyrics.length) {
+          const line = document.createElement("div");
+          line.classList.add("line");
+          if (lyrics[index].text === "") {
+            line.innerHTML = "<br>";
+          } else {
+            line.innerHTML = `<span class="chord">${lyrics[index].chord}</span>${lyrics[index].text}`;
+          }
+
+          // hapus highlight sebelumnya
+          const prev = display.querySelector(".highlight");
+          if (prev) prev.classList.remove("highlight");
+
+          line.classList.add("highlight");
+          display.appendChild(line);
+          display.scrollTop = display.scrollHeight;
+          index++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 2500); // jeda 2,5 detik per baris
+    }
+  </script>
+</body>
+</html>
